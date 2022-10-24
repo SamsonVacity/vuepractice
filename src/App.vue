@@ -5,11 +5,13 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+//import VuePractice1 from './components/VuePractice1.html'
 
 export default {
   name: 'App',
   components: {
     HelloWorld
+    //VuePractice1
   }
 }
 </script>

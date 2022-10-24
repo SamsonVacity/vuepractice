@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练习1</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.2.41/dist/vue.global.min.js"></script>
+<script>
+    //数据对象
+    let data = {a:'张三'}
+    new Vue({
+        name:'VuePractice1',
+        el:"#app",
+        data:data
+    })
+
+    //获得这个实例上的属性
+    //返回源数据中对应的字段
+    console.log(vue.a == data.a)      //结果：true
+
+    //设置属性也会影响原始数据
+    vue.a = '李四'
+    console.log(data.a)      //结果：李四
+
+    data.a = '王五'
+    console.log(vue.a)      //结果：王五
+</script>
+</body>
+</html>
