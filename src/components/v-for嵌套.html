@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue练习5</title>
+</head>
+<body>
+<div id="app" v-cloak>
+    <div v-for="(item,index) in items" :key="index">
+        <div>
+            {{"--"+item.title}}
+            <div v-for="(item2,index2) in item.children" :key="index2">
+                {{item2.title}}
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data(){
+            return{
+                items:[
+                    {
+                        title:'肉类',
+                        children:[
+                            {title:"羊肉"},
+                            {title:"羊肉1"},
+                            {title:"羊肉2"}
+                        ]
+                    },
+                    {
+                        title: '主食',
+                        children: [
+                            {title:'馒头'},
+                            {title:'馒头1'},
+                            {title:'馒头2'}
+                        ]
+                    }
+                ]
+            }
+        }
+    })
+</script>
+</body>
+</html>

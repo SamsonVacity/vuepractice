@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue练习2</title>
+</head>
+<body>
+<div id="app" v-cloak>
+    <div v-if="loginType==='1'">手机号:<input type="text" placeholder="请输入手机号" key="1"></div>
+    <div v-else>E-mail:<input type="text" placeholder="请输入E-mail" key="2"></div>
+    <div>
+        <button type="button" v-on:click="loginType=loginType==='1'?'2':'1'">切换登录方式</button>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+<script>
+    let vue=new Vue({
+        el:"#app",
+        data(){
+            return{
+                loginType:'1'
+            }
+        }
+    })
+</script>
+</body>
+</html>

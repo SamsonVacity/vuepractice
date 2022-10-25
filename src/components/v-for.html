@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue练习3</title>
+</head>
+<body>
+<div id="app" v-cloak>
+    <div v-for="item in list">菜品：{{item.title}}、价格:{{item.price}}</div>
+    <div v-for="(item,index) in list">索引：{{index}}、菜品：{{item.title}}、价格:{{item.price}}</div>
+    <div v-for="(value,key,index) in list">索引：{{index}}、属性：{{key}}、值:{{value}}</div>
+    <template v-for="(item,index) in list">
+        <div>索引：{{index}}、菜品：{{item.title}}、价格:{{item.price}}</div>
+    </template>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data(){
+            return {
+                list: [
+                    {title: "羊肉串", price: 2},
+                    {title: "牛肉串", price: 4},
+                    {title: "猪肉串", price: 6}
+                ]
+            }
+        }
+    })
+    vue.$data.list[0].price=14;
+    vue.$set(vue.$data.list,1,vue.$data.list[0]);
+</script>
+</body>
+</html>
