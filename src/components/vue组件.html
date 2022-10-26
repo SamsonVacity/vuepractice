@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue练习8</title>
+</head>
+<body>
+<div id="app" v-cloak></div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+<script>
+    /*Vue.component("PublicComponent",{
+        data(){
+            return{
+                title:"公共组件"
+            }
+        },
+        template:`
+            <<div>
+                {{title}}
+            </div>
+        `
+    });*/
+    //全局组件
+    let PublicComponent={
+        template:`
+            <div>全局组件</div>
+        `
+    }
+    Vue.component("PublicComponent",PublicComponent);
+
+    //局部组件A
+    let AComponent={
+        template: `
+            <div>
+                <!--使用全局组件-->
+                <PublicComponent></PublicComponent>
+                我是组件A
+            </div>
+        `
+    }
+
+    //局部组件B
+    let BComponent={
+        template:`
+            <div>
+                <!--使用全局组件-->
+                <PublicComponent></PublicComponent>
+                <!--使用组件A-->
+                <AComponent></AComponent>
+                我是B组件
+            </div>
+        `,
+        components:{
+            //注册A组件
+            AComponent
+        }
+    }
+    new Vue({
+        el:"#app",
+        components:{
+          //注册B组件
+          BComponent
+        },
+        template: `
+            <div>
+                <!--使用B组件-->
+                <BComponent></BComponent>
+            </div>
+        `
+    })
+</script>
+</body>
+</html>

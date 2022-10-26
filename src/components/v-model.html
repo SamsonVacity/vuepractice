@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue练习7</title>
+</head>
+<body>
+<div id="app" v-cloak>
+    <div><input type="text" v-model="msg"/> {{msg}}</div>
+    <div><textarea v-model="msg"></textarea> {{msg}}</div>
+    <div>
+        <input type="checkbox" id="checkbox" v-model="checkbox">
+        <label for="checkbox">{{checked}}</label>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data(){
+            return{
+                msg:'',
+                checked:false
+            }
+        }
+    })
+</script>
+</body>
+</html>
