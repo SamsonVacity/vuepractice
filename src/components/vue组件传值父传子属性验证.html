@@ -10,8 +10,17 @@
 <script>
     //子组件
     let CC={
-        //使用props接收属性
-        props:["post-title","sub-title"],
+        //使用props接收属性并验证类型
+        props:{
+            "post-title":{
+                type:String,
+                required:true    //验证父组件是否有该属性
+            },
+            "sub-title":{
+                type:String,
+                default:"xxx "        //默认值
+            }
+        },
         template:`
             <div>{{postTitle}}-{{subTitle}}</div>
         `
