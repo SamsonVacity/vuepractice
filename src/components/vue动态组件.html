@@ -8,49 +8,48 @@
             display: none;
         }
         .tab-wrap{width: 100%}
-        .classifys-tab,.tab-wrap.tab{display: inline-block;padding: 5px 10px;border: 1px solid #EFEFEF;font-size: 14px;margin-right: 5px;}
-        .classifys-tab.active,.tab-wrap.tab-active{background-color: #0000FF; color: #FFFFFF}
+        .classifys-tab, .tab-wrap .tab{display: inline-block;padding: 5px 10px;border: 1px solid #EFEFEF;font-size: 14px;margin-right: 5px;}
+        .classifys-tab.active, .tab-wrap .tab.active{background-color: #0000FF; color: #FFFFFF}
         .main{border: 1px solid #EFEFEF;padding: 10px;}
     </style>
 </head>
 <body>
 <div id="app" v-cloak></div>
-<script type="text/javascript" src="src/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
 <script>
     //菜品详情组件
-    let DC={
+    let DetailComponent={
         template:`
             <div class="main">商品详情</div>
         `
     };
     //会员登录组件
-    let LC={
+    let LoginComponent={
         template: `
-            <div class="main">
-                <input type="text"/><button type="button">登录</button>
-            </div>
+            <div class="main"><input type="text"/></br><input type="text"/></br><button type="button">登录</button></div>
         `
     };
     //菜品分类组件
-    let CC={
+    let ClassifyComponent={
         data(){
             return{
                 classifys:[
                     {id:1,title:"羊肉串",active:true},
                     {id:2,title:"啤酒",active:false},
-                    {id:3,title:"馒头片",active:false}
+                    {id:3,title:"馒头片",active:false},
+                    {id:3,title:"疙瘩汤",active:false}
                 ]
             }
         },
         template:`
           <div class="main">
-            <div v-for="(item,index) in classifys" :class="{'classifys-tab':true,active:item.active}":key="item.id" @click="selectClassify(index)">{{item.title}}</div>
+            <div v-for="(item,index) in classifys" :class="{'classifys-tab':true,active:item.active}" :key="item.id" @click="selectClassify(index)">{{item.title}}</div>
           </div>
         `,
         methods:{
             //在视图@click="selectClassify(index)"位置使用
             selectClassify(index){
-                for (let i=0;i<this.length;i++){
+                for (let i=0;i<this.classifys.length;i++){
                     //如果classifys中的active属性值为true
                     if(this.classifys[i].active){
                         //将active为true的值改成false并跳出循环
@@ -70,8 +69,8 @@
         data(){
             return{
                 tabs:[
-                    {title:"菜品详情",componentName:"DetailComponent",active:"true"},
                     {title:"会员登录",componentName:"LoginComponent",active:"false"},
+                    {title:"菜品详情",componentName:"DetailComponent",active:"true"},
                     {title:"菜品分类",componentName:"ClassifyComponent",active:"false"},
                 ],
                 //在视图中：is的值
@@ -81,7 +80,7 @@
         template:`
             <div>
               <div class="tab-wrap">
-                <div :class="{tab:true,active:item.active}"v-for="(item,index) in tabs" :key="index" @click="selectTab(index,item.componentName)">
+                <div :class="{tab:true,active:item.active}" v-for="(item,index) in tabs" :key="index" @click="selectTab(index,item.componentName)">
                   {{item.title}}
                 </div>
               </div>
@@ -98,7 +97,7 @@
         methods:{
             //改变tab样式，切换显示的组件
             selectTab(index,componentName){
-                for(let i=0;i<this.length;i++){
+                for(let i=0;i<this.tabs.length;i++){
                     //如果classify中的active属性值位true
                     if(this.tabs[i].active){
                         //将active为true的值改为false并跳出循环
@@ -107,7 +106,7 @@
                     }
                 }
                 //将选中的数据active属性值设置为true
-                this.tabs[i].active=true;
+                this.tabs[index].active=true;
                 //解决视图样式不渲染的问题
                 this.$set(this.tabs,index,this.tabs[index]);
                 //显示当前组件
