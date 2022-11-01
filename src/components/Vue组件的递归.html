@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        [v-clock]{
+            display: none;
+        }
+        bodyP{margin: 0px;padding: 0px}
+        .tree-row{
+            width: 100%;
+            height: auto;
+            box-sizing: border-box;
+            border-top: 1px solid #EFEFEF;
+            border-bottom: 1px solid #EFEFEF;
+            font-size: 14px;
+            overflow: hidden;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak></div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+<script>
+    //tree组件
+    let TreeComponent={
+        name:"tree-component",
+        props:{
+            //表示第几层，0代表第一层
+            level:{
+                type:Number,
+                default:0
+            },
+            data:{
+                type:Array,
+                default: ()=>[]           //Array或Object默认值必须用工厂函数返回
+            }
+        },
+        template:`
+          <div>
+            <div class="tree-row" v-for="(item,index) in data" :key="index">
+              <span :style="{'padding-left':level*20+'px'}">{{item.title}}</span>
+              <tree-component level="level+1" :data="item.children" v-if="item.children && item.children.length>0"></tree-component>
+            </div>
+          </div>
+        `
+    };
+    new Vue({
+        el:"#app",
+        data(){
+            return{
+                classifys:[
+                    {
+                        title:"数码",
+                        children:[
+                            {
+                                title: "手机",
+                                children:[
+                                    {title:"华为手机"},
+                                    {title:"小米手机"}
+                                ]
+                            },
+                            {title: "计算机"}
+                        ]
+                    },
+                    {
+                        title:"家电",
+                        children:[
+                            {title:"小米家电"},
+                            {title:"华为家电"},
+                            {title:"京东家电"}
+                        ]
+                    }
+                ]
+            }
+        },
+        components:{
+            TreeComponent
+        },
+        template:`
+          <div>
+            <tree-component :data="classifys"></tree-component>
+          </div>
+        `
+    })
+</script>
+</body>
+</html>

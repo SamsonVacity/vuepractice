@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+        /*进入过渡时的开始状态*/
+        .slide-fade-enter{
+            transform: translateX(0px);
+        }
+        /*进入过渡生效时的状态*/
+        .slide-fade-enter-active{
+            transition: all .3s ease;
+        }
+        /*离开过渡生效时的状态*/
+        .slide-fade-leave-active{
+            transition: all .8s cubic-bezier(1.0,0.5,0.8,1.0);
+        }
+        /*离开过渡时的结束状态*/
+        .slide-fade-leave-to{
+            transform: translateX(200px);
+        }
+        .box{width: 100px;height: 100px;background-color: #0000FF;font-size: 14px;color: #FFFFFF}
+    </style>
+</head>
+<body>
+<div id="app" v-cloak></div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+<script>
+    //app组件
+    let APPComponent={
+        template:`
+            <div>
+                <button @click="show = !show">Toggle render</button>
+                <transition name="slide-fade"><div class="box" v-if="show">hello</div></transition>
+            </div>
+        `,
+        data(){
+            return{
+                show:true
+            }
+        }
+    };
+    new Vue({
+        el:"#app",
+        template: `
+            <APPComponent></APPComponent>
+        `,
+        components:{
+            APPComponent
+        }
+    })
+</script>
+</body>
+</html>
